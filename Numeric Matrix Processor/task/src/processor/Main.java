@@ -2,10 +2,13 @@ package processor;
 
 import java.util.Scanner;
 
+/* This class makes sum of two matrix and prints the result */
+
 class AddMatrix{
 
     public void addition() {
         Scanner scanner = new Scanner(System.in);
+        /* Work with first matrix */
         System.out.print("Enter size of first matrix: > ");
         int rowsA = scanner.nextInt();
         int colsA = scanner.nextInt();
@@ -18,7 +21,7 @@ class AddMatrix{
                 matrixA[i][j] = Float.parseFloat(scanner.next());
             }
         }
-
+        /* Work with second matrix */
         System.out.print("Enter size of second matrix: > ");
         int rowsB = scanner.nextInt();
         int colsB = scanner.nextInt();
@@ -32,6 +35,7 @@ class AddMatrix{
             }
         }
 
+        /* Printing the result */
         if (rowsA == rowsB && colsA == colsB) {
             System.out.println("The sum result is:");
             for (int i = 0; i < rowsB; i++) {
@@ -47,11 +51,12 @@ class AddMatrix{
         }
     }
 }
-
+/* This class makes multiplication of matrix and a constant number */
 class Multiplication {
 
     public void multi(){
         Scanner scanner = new Scanner(System.in);
+        /* Work with matrix */
         System.out.print("Enter size of matrix: > ");
         int rows = scanner.nextInt();
         int cols = scanner.nextInt();
@@ -64,10 +69,11 @@ class Multiplication {
                 matrix[i][j] = Float.parseFloat(scanner.next());
             }
         }
-
+        /* Work with constant */
         System.out.print("Enter constant: > ");
         int num = scanner.nextInt();
 
+        /* Printing the result */
         System.out.println("The multiplication result is:");
         for (int i = 0; i < rows; i++){
             for (int j = 0; j < cols; j++){
@@ -80,10 +86,12 @@ class Multiplication {
     }
 }
 
+/* This class makes multiplication of two matrix */
 class MultiMatrix{
     public void multiMatrix(){
         Scanner scanner = new Scanner(System.in);
 
+        /* Work with first matrix */
         System.out.print("Enter size of first matrix: > ");
         int rowsA = scanner.nextInt();
         int colsA = scanner.nextInt();
@@ -97,6 +105,7 @@ class MultiMatrix{
             }
         }
 
+        /* Work with second matrix */
         System.out.print("Enter size of second matrix: > ");
         int rowsB = scanner.nextInt();
         int colsB = scanner.nextInt();
@@ -109,6 +118,7 @@ class MultiMatrix{
             }
         }
 
+        /* Algorithm of matrix multiplication */
         double[][] resMatrix = new double[rowsA][colsB];
         System.out.println("The multiplication result is:");
         for (int i = 0; i < rowsA; i++) {
@@ -118,6 +128,8 @@ class MultiMatrix{
                 }
             }
         }
+
+        /* Printing matrix */
         for (int i = 0; i < rowsA; i++) {
             for (int j = 0; j < colsB; j++) {
                 System.out.print(resMatrix[i][j] + " ");
@@ -127,11 +139,12 @@ class MultiMatrix{
         System.out.println();
     }
 }
-
+/* This class implements four types of transpositions */
 class Transposition{
 
     Scanner scanner = new Scanner(System.in);
 
+    /* Transposition relatively main diagonal */
     private void mainDiagonal(float[][] matrix){
         System.out.println("The result is:");
         for (int i = 0; i < matrix.length; i++){
@@ -143,6 +156,7 @@ class Transposition{
         System.out.println();
     }
 
+    /* Transposition relatively side diagonal */
     private void sideDiagonal(float[][] matrix){
         System.out.println("The result is:");
         for (int i = matrix.length - 1; i >= 0; i--){
@@ -154,6 +168,7 @@ class Transposition{
         System.out.println();
     }
 
+    /* Transposition by a vertical line */
     private void verticalLine(float[][] matrix){
         System.out.println("The result is:");
         for (int i = 0; i < matrix.length; i++){
@@ -165,6 +180,7 @@ class Transposition{
         System.out.println();
     }
 
+    /* Transposition by a horizontal line */
     private void horizontalLine(float[][] matrix){
         System.out.println("The result is:");
         for (int i = matrix.length - 1; i >= 0; i--){
@@ -219,6 +235,8 @@ class Transposition{
         return matrix;
     }
 }
+
+/* Menue class */
 class Menue {
     public void menue(){
         while (true){
