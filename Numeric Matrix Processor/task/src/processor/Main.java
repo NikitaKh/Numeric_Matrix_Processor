@@ -3,7 +3,6 @@ package processor;
 import java.util.Scanner;
 
 /* This class makes sum of two matrix and prints the result */
-
 class AddMatrix{
 
     public void addition() {
@@ -51,6 +50,7 @@ class AddMatrix{
         }
     }
 }
+
 /* This class makes multiplication of matrix and a constant number */
 class Multiplication {
 
@@ -139,6 +139,7 @@ class MultiMatrix{
         System.out.println();
     }
 }
+
 /* This class implements four types of transpositions */
 class Transposition{
 
@@ -236,6 +237,81 @@ class Transposition{
     }
 }
 
+/* This class calculates a determinant of a matrix. */
+class Determinant{
+    private int rows;
+    private int cols;
+    private float answer;
+    private float[][] matrix;
+
+    /* This method calculates a determinant of a matrix and returns its value */
+    private float matrixDeterminant(float[][] matrix, int size) {
+        float det = 0;
+        int degree = 1;
+
+        if(size == 1) {
+            return matrix[0][0];
+        }
+        else if(size == 2) {
+            return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+        }
+        else {
+            /* New matrix without row and col */
+            float[][] newMatrix = new float[size-1][size-1];
+            for(int j = 0; j < size; j++) {
+                matrixCleaning(matrix, size, 0, j, newMatrix);
+                det = det + (degree * matrix[0][j] * matrixDeterminant(newMatrix, size-1));
+                degree = -degree;
+            }
+        }
+        return det;
+    }
+
+    /* This is an assistant method that delete specific row and col from matrix */
+    private void matrixCleaning(float[][] matrix, int size, int row, int col, float[][] newMatrix) {
+        int offsetRow = 0;
+        int offsetCol = 0;
+
+        for(int i = 0; i < size-1; i++) {
+            if(i == row) {
+                offsetRow = 1;
+            }
+            offsetCol = 0;
+            for(int j = 0; j < size-1; j++) {
+                if(j == col) {
+                    offsetCol = 1;
+                }
+                newMatrix[i][j] = matrix[i + offsetRow][j + offsetCol];
+            }
+        }
+    }
+
+    /* This method scans matrix and place it at the matrix field */
+    /* Then it invokes method that calculates a determinant of a matrix and print it */
+    public void matrixScanner(){
+        Scanner scanner = new Scanner(System.in);
+
+        /* Size scanning */
+        System.out.print("Enter matrix size: > ");
+        rows = scanner.nextInt();
+        cols = scanner.nextInt();
+        matrix = new float[rows][cols];
+
+        /* Matrix scanning */
+        System.out.println("Enter matrix:");
+        for (int i = 0; i < rows; i++) {
+            System.out.print("> ");
+            for (int j = 0; j < cols; j++) {
+                matrix[i][j] = Float.parseFloat(scanner.next());
+            }
+        }
+        /* Method invoke */
+        answer = matrixDeterminant(matrix, rows);
+        /* Determinant printing */
+        System.out.println("The result is:\n" + answer + "\n");
+    }
+}
+
 /* Menue class */
 class Menue {
     public void menue(){
@@ -246,6 +322,7 @@ class Menue {
                     "2. Multiply matrix to a constant\n" +
                     "3. Multiply matrices\n" +
                     "4. Transpose matrix\n" +
+                    "5. Calculate a determinant\n" +
                     "0. Exit\n" +
                     "Your choice: > ");
             ans = scanner.next();
@@ -265,6 +342,10 @@ class Menue {
                 case ("4"):
                     Transposition tr = new Transposition();
                     tr.matrixMenue();
+                    break;
+                case ("5"):
+                    Determinant det = new Determinant();
+                    det.matrixScanner();
                     break;
                 case ("0"):
                     System.exit(0);
