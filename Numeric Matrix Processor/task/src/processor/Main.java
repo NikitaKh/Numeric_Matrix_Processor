@@ -1,5 +1,6 @@
 package processor;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /* This class makes sum of two matrix and prints the result */
@@ -215,7 +216,8 @@ class Transposition{
                 horizontalLine(matrixScanner());
                 break;
             default:
-                System.out.println("ERROR");
+                System.out.println("ERROR TRY AGAIN");
+                matrixMenue();
                 break;
         }
     }
@@ -230,7 +232,15 @@ class Transposition{
         for (int i = 0; i < rowsA; i++) {
             System.out.print("> ");
             for (int j = 0; j < colsA; j++) {
-                matrix[i][j] = Float.parseFloat(scanner.next());
+                try{
+                    matrix[i][j] = Float.parseFloat(scanner.next());
+                } catch (InputMismatchException e){
+                    System.out.println("WRONG VALUE TRY AGAIN");
+                    System.exit(0);
+                } catch (NumberFormatException e){
+                    System.out.println("WRONG VALUE TRY AGAIN");
+                    System.exit(0);
+                }
             }
         }
         return matrix;
@@ -293,8 +303,13 @@ class Determinant{
 
         /* Size scanning */
         System.out.print("Enter matrix size: > ");
-        rows = scanner.nextInt();
-        cols = scanner.nextInt();
+        try {
+            rows = scanner.nextInt();
+            cols = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("WRONG VALUE TRY AGAIN");
+            matrixScanner();
+        }
         matrix = new float[rows][cols];
 
         /* Matrix scanning */
@@ -302,13 +317,60 @@ class Determinant{
         for (int i = 0; i < rows; i++) {
             System.out.print("> ");
             for (int j = 0; j < cols; j++) {
-                matrix[i][j] = Float.parseFloat(scanner.next());
+                try {
+                    matrix[i][j] = Float.parseFloat(scanner.next());
+                } catch (InputMismatchException e) {
+                    System.out.println("WRONG VALUE TRY AGAIN");
+                    matrixScanner();
+                } catch (NumberFormatException e) {
+                    System.out.println("WRONG VALUE TRY AGAIN");
+                    matrixScanner();
+                }
             }
         }
         /* Method invoke */
         answer = matrixDeterminant(matrix, rows);
         /* Determinant printing */
         System.out.println("The result is:\n" + answer + "\n");
+    }
+}
+
+/* This class  finds an inverse of a matrix. */
+class MatrixInverse{
+    private int rows;
+    private int cols;
+    private float[][] matrix;
+
+    public void matrixScanner(){
+        Scanner scanner = new Scanner(System.in);
+
+        /* Size scanning */
+        System.out.print("Enter matrix size: > ");
+        try {
+            rows = scanner.nextInt();
+            cols = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("WRONG VALUE TRY AGAIN");
+            matrixScanner();
+        }
+        matrix = new float[rows][cols];
+
+        /* Matrix scanning */
+        System.out.println("Enter matrix:");
+        for (int i = 0; i < rows; i++) {
+            System.out.print("> ");
+            for (int j = 0; j < cols; j++) {
+                try {
+                    matrix[i][j] = Float.parseFloat(scanner.next());
+                } catch (InputMismatchException e) {
+                    System.out.println("WRONG VALUE TRY AGAIN");
+                    matrixScanner();
+                } catch (NumberFormatException e) {
+                    System.out.println("WRONG VALUE TRY AGAIN");
+                    matrixScanner();
+                }
+            }
+        }
     }
 }
 
@@ -323,6 +385,7 @@ class Menue {
                     "3. Multiply matrices\n" +
                     "4. Transpose matrix\n" +
                     "5. Calculate a determinant\n" +
+                    "6. Inverse matrix\n" +
                     "0. Exit\n" +
                     "Your choice: > ");
             ans = scanner.next();
@@ -346,6 +409,10 @@ class Menue {
                 case ("5"):
                     Determinant det = new Determinant();
                     det.matrixScanner();
+                    break;
+                case ("6"):
+                    MatrixInverse inv = new MatrixInverse();
+                    inv.matrixScanner();
                     break;
                 case ("0"):
                     System.exit(0);
