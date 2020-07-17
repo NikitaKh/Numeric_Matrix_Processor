@@ -371,6 +371,76 @@ class MatrixInverse{
                 }
             }
         }
+        inversion();
+    }
+
+    /* This method implements the matrix inversion */
+    void inversion() {
+        double temp;
+        float [][] E = new float [rows][cols];
+
+
+        for (int i = 0; i < rows; i++)
+            for (int j = 0; j < cols; j++)
+            {
+                E[i][j] = 0f;
+
+                if (i == j)
+                    E[i][j] = 1f;
+            }
+
+        for (int k = 0; k < rows; k++)
+        {
+            temp = matrix[k][k];
+
+            for (int j = 0; j < cols; j++)
+            {
+                matrix[k][j] /= temp;
+                E[k][j] /= temp;
+            }
+
+            for (int i = k + 1; i < rows; i++)
+            {
+                temp = matrix[i][k];
+
+                for (int j = 0; j < cols; j++)
+                {
+                    matrix[i][j] -= matrix[k][j] * temp;
+                    E[i][j] -= E[k][j] * temp;
+                }
+            }
+        }
+
+        for (int k = rows - 1; k > 0; k--)
+        {
+            for (int i = k - 1; i >= 0; i--)
+            {
+                temp = matrix[i][k];
+
+                for (int j = 0; j < cols; j++)
+                {
+                    matrix[i][j] -= matrix[k][j] * temp;
+                    E[i][j] -= E[k][j] * temp;
+                }
+            }
+        }
+
+        for (int i = 0; i < rows; i++){
+            for (int j = 0; j < cols; j++){
+                matrix[i][j] = E[i][j];
+            }
+        }
+        printMatrix(matrix);
+    }
+
+    private void printMatrix(float[][] matrix){
+        System.out.println("The result is:");
+        for (int i = 0; i < matrix.length; i++){
+            for (int j = 0; j < matrix[i].length; j++){
+                System.out.printf("%1.2f%s", matrix[i][j], " ");
+            }
+            System.out.println();
+        }
     }
 }
 
