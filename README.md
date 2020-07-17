@@ -3,4 +3,4 @@ This application implements matrices operations such as: addition, multiplicatio
 
 <h4>Below is an example of how to use program.<h4>
 
-https://github.com/NikitaKh/Numeric_Matrix_Processor/blob/master/img.png
+![alt text](https://github.com/NikitaKh/Numeric_Matrix_Processor/blob/master/img.png)
