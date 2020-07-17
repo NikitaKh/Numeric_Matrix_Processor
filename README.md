@@ -1,7 +1,7 @@
 # Numeric_Matrix_Processor
 This application implements matrices operations such as: addition, multiplication, finding the determinant, and inverse matrices.
 
-Below is an example of how to use program.
+<h1>Below is an example of how to use program.
 
 1. Add matrices
 2. Multiply matrix to a constant
@@ -10,9 +10,9 @@ Below is an example of how to use program.
 5. Calculate a determinant
 6. Inverse matrix
 0. Exit
-Your choice: \> 3
-Enter size of first matrix: \> 3 3
-Enter first matrix:
+*Your choice: \> 3
+*Enter size of first matrix: \> 3 3
+*Enter first matrix:
 \> 1 7 7
 \> 6 6 4
 \> 4 2 1
